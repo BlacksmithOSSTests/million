@@ -1,17 +1,13 @@
 name: Automated Responses
 
 on:
-  issues:
-    types: [opened]
-  pull_request_target:
-    types: [opened]
+  pull_request:
 
 jobs:
   respond:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith
     steps:
     - name: Comment on new issue
-      if: github.event_name == 'issues'
       uses: actions/github-script@v6
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -24,7 +20,6 @@ jobs:
           })
           
     - name: Comment on new pull request
-      if: github.event_name == 'pull_request_target'
       uses: actions/github-script@v6
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
